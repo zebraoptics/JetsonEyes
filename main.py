@@ -4,8 +4,8 @@ from jetson_csi_camera import DualCSICamera, DualCameraConfig, CameraConfig
 
 # Optional: customise resolution / framerate per camera
 config = DualCameraConfig(
-    cam0=CameraConfig(sensor_id=0, width=1920, height=1080, framerate=10),
-    cam1=CameraConfig(sensor_id=1, width=1920, height=1080, framerate=10),
+    cam0=CameraConfig(sensor_id=0, width=3280, height=2464, framerate=20),
+    cam1=CameraConfig(sensor_id=1, width=3280, height=2464, framerate=20),
 )
 
 with DualCSICamera(config) as cams:
@@ -17,8 +17,8 @@ with DualCSICamera(config) as cams:
             continue
 
         # Downscale for display only
-        disp_left  = cv2.resize(left,  (640, 360))
-        disp_right = cv2.resize(right, (640, 360))
+        disp_left  = cv2.resize(left,  (640, 480))
+        disp_right = cv2.resize(right, (640, 480))
 
         # Overlay FPS
         for img, cam in [(disp_left, cams.cam0), (disp_right, cams.cam1)]:
